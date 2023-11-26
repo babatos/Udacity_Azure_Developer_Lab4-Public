@@ -32,14 +32,14 @@ config_integration.trace_integrations(["requests"])
 # Logging
 logger = logging.getLogger(__name__)
 handler = AzureLogHandler(
-    connection_string="InstrumentationKey=df8227b7-2dcf-496a-bda0-a51be80bc542"
+    connection_string="InstrumentationKey=408c5d27-746f-4f59-9992-505848186c32"
 )
 handler.setFormatter(logging.Formatter("%(traceId)s %(spanId)s %(message)s"))
 logger.addHandler(handler)
 # Logging custom Events
 logger.addHandler(
     AzureEventHandler(
-        connection_string="InstrumentationKey=df8227b7-2dcf-496a-bda0-a51be80bc542"
+        connection_string="InstrumentationKey=408c5d27-746f-4f59-9992-505848186c32"
     )
 )
 # Set the logging level
@@ -48,14 +48,14 @@ logger.setLevel(logging.INFO)
 # Metrics
 exporter = metrics_exporter.new_metrics_exporter(
     enable_standard_metrics=True,
-    connection_string="InstrumentationKey=df8227b7-2dcf-496a-bda0-a51be80bc542",
+    connection_string="InstrumentationKey=408c5d27-746f-4f59-9992-505848186c32",
 )
 view_manager.register_exporter(exporter)
 
 # Tracing
 tracer = Tracer(
     exporter=AzureExporter(
-        connection_string="InstrumentationKey=df8227b7-2dcf-496a-bda0-a51be80bc542"
+        connection_string="InstrumentationKey=408c5d27-746f-4f59-9992-505848186c32"
     ),
     sampler=ProbabilitySampler(1.0),
 )
@@ -66,7 +66,7 @@ app = Flask(__name__)
 middleware = FlaskMiddleware(
     app,
     exporter=AzureExporter(
-        connection_string="InstrumentationKey=df8227b7-2dcf-496a-bda0-a51be80bc542"
+        connection_string="InstrumentationKey=408c5d27-746f-4f59-9992-505848186c32"
     ),
     sampler=ProbabilitySampler(rate=1.0),
 )
@@ -202,6 +202,5 @@ if __name__ == "__main__":
     # comment line below when deploying to VMSS
     #app.run()  # local
     # uncomment the line below before deployment to VMSS
-    app.run(host="0.0.0.0", threaded=True, debug=True)  # remote
-    #pp.run(host='0.0.0.0', threaded=True, debug=True, port=5000) # remote
-
+    #app.run(host="0.0.0.0", threaded=True, debug=True)  # remote
+    app.run(host='0.0.0.0', threaded=True, debug=True, port=5000) # remote

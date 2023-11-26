@@ -68,7 +68,7 @@ az vmss create \
   --custom-data cloud-init.txt \
   --upgrade-policy-mode automatic \
   --admin-username $adminName \
-  --generate-ssh-keys --verbose --ssh-key-value ~\.ssh\aks-ssh.pub \
+  --generate-ssh-keys \
   --verbose 
 
 echo "VM scale set created: $vmssName"
